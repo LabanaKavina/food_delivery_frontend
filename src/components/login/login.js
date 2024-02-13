@@ -1,6 +1,9 @@
 import { useState } from "react";
 import image from "../../UI/pizza.jpeg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../user/userActions";
+
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setPassword] = useState("");
@@ -8,6 +11,8 @@ const Login = () => {
     name: "",
     password: "",
   });
+const dispatch = useDispatch();
+const navigate = useNavigate()
 
   const validateUserData = () => {
     let properName = /^[a-zA-Z ]{2,30}$/;
@@ -28,7 +33,8 @@ const Login = () => {
     e.preventDefault();
     const isValidUserData = validateUserData()
     if (isValidUserData) {
-        
+        dispatch(getUser({name: userName, password: userPassword}))
+        navigate("/admin")
     }
   };
   return (
@@ -68,14 +74,14 @@ const Login = () => {
               {error && <span className="w-80 text-sm">{error.password}</span>}
               <button
                 type="submit"
-                className="h-10 bg-red-600 mt-6 w-72 text-white text-xl"
+                className="ml-5 h-10 bg-red-600 mt-6 w-72 text-white text-xl"
               >
                 Login
               </button>
             </form>
             <NavLink
               to="/register-new"
-              className="text-sm left-28 bottom-5 text-blue-600 underline relative"
+              className="text-sm left-36 bottom-5 text-blue-600 underline relative"
             >
               Sign up for register{" "}
             </NavLink>
