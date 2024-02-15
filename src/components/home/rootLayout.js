@@ -12,7 +12,7 @@ const RootLayout = ()=>{
     </header>
  <div className="flex">
     <aside className="h-96 w-52 flex gap-10 flex-col shadow-lg shadow-gray-400 p-12 text-2xl">
-        <button className="h-10 w-20 mt-10 border-b-2 border-yellow-500">Menu</button>
+        <button onClick={() => navigate('/admin/menu')} className="h-10 w-20 mt-10 border-b-2 border-yellow-500">Menu</button>
         <button className="h-10 w-20 mt-10 border-b-2 border-yellow-500">Orders</button>
     </aside>
     
