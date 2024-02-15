@@ -33,7 +33,6 @@ export const getLogInUser = (id)=>{
             }
 
             const data = await response.json()
-            console.log(data);
             dispatch(userAction.setUser(data[0]))
             localStorage.setItem('user',data[0].id)
         } catch (error) {
@@ -42,3 +41,33 @@ export const getLogInUser = (id)=>{
     }
 }
 
+export const getRestaurantDetails = (id) => {
+    return async (dispatch) => {
+        try{
+            const response = await fetch(`http://localhost:3030/user/restaurant?id=${id}`)
+            if (!response.ok) {
+                throw new Error('Could not fetch restaurant details')
+            }
+            const data = await response.json()
+            dispatch(userAction.setRestaurant(data[0]))
+        }catch(e){
+            console.log(e);
+        }
+    }
+}
+
+
+export const getItemsDetails = (id) => {
+    return async (dispatch) => {
+        try{
+            const response = await fetch(`http://localhost:3030/user/res_items?hotel_id=${id}`)
+            if (!response.ok) {
+                throw new Error('Could not fetch items')
+            }
+            const data = await response.json()
+            dispatch(userAction.setItems(data))
+        }catch(e){
+            console.log(e);
+        }
+    }
+}

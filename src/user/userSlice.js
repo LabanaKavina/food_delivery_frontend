@@ -3,11 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
     name : 'user',
     initialState : {
-        user : null
+        user : null,
+        restaurant : null,
+        items : []
     },
     reducers : {
         setUser : (state , action) => {
             state.user = action.payload
+        },
+        setRestaurant : (state , action) => {
+            state.restaurant = action.payload
+        },
+        setItems : (state , action) => {
+            state.items = action.payload
         }
     }
 })

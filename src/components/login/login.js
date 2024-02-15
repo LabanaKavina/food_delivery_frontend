@@ -2,7 +2,7 @@ import { useState } from "react";
 import image from "../../UI/pizza.jpeg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUser } from "../../user/userActions";
+import { getRestaurantDetails, getUser } from "../../user/userActions";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
