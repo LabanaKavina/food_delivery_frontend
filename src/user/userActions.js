@@ -1,4 +1,3 @@
-import { itemsAction } from "../items/itemsSlice"
 import { userAction } from "./userSlice"
 
 export const getUser = (user)=>{
@@ -55,22 +54,6 @@ export const getRestaurantDetails = (id) => {
             }
             const data = await response.json()
             dispatch(userAction.setRestaurant(data[0]))
-        }catch(e){
-            console.log(e);
-        }
-    }
-}
-
-
-export const getItemsDetails = (id) => {
-    return async (dispatch) => {
-        try{
-            const response = await fetch(`http://localhost:3030/user/res_items?hotel_id=${id}`)
-            if (!response.ok) {
-                throw new Error('Could not fetch items')
-            }
-            const data = await response.json()
-            dispatch(itemsAction.setItems(data))
         }catch(e){
             console.log(e);
         }

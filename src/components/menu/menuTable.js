@@ -1,22 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { MenuForm } from "./menuForm";
-
-export const MenuTable = () => {
-  const items = useSelector((state) => state.items.items);
-  const [ showAddItemForm , setShowAddItemForm] = useState(false)
-  const hideForm = () => {
-    setShowAddItemForm(!showAddItemForm)
-  }
-  return (
-    <>
-      <div className="flex flex-col h-screen border border-solid border-black w-full">
-        <div className="flex justify-end mr-16 mt-6">
-          <button onClick={() => setShowAddItemForm(!showAddItemForm)} className="border border-solid border-yellow-500 h-12 w-24 ">
-            Add Item
-          </button>
-        </div>
-        <div className="overflow-x-auto">
+const MenuTable =(props)=>{
+    return(<>
+    {props.items && props.items.length!==0 &&
     <table className="min-w-full">
       <thead className="text-xl">
         <tr>
@@ -37,7 +21,7 @@ export const MenuTable = () => {
         </tr>
       </thead>
       <tbody className="bg-white text-lg text-gray-500">
-        {items.map((item, index) => {
+        {props.items.map((item, index) => {
           return (
             <tr key={index} className="border-t border-gray-200">
               <td className="px-16 py-4 ">
@@ -62,12 +46,8 @@ export const MenuTable = () => {
           );
         })}
       </tbody>
-    </table>
-  </div>
-  {
-    showAddItemForm && <MenuForm onCancel={hideForm}/>
-  }
-      </div>
-    </>
-  );
-};
+    </table>}
+    </>)
+}
+
+export default MenuTable

@@ -9,6 +9,10 @@ const itemsSlice = createSlice({
     setItems: (state, action) => {
       state.items = action.payload;
     },
+
+    addItem:(state,action)=>{
+      state.items.push(action.payload);
+    }
   },
 });
 

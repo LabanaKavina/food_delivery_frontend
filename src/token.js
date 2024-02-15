@@ -1,5 +1,6 @@
 import { redirect } from "react-router"
-import { getItemsDetails, getLogInUser, getRestaurantDetails } from "./user/userActions"
+import {  getLogInUser, getRestaurantDetails } from "./user/userActions"
+import { getItemsDetails } from "./items/itemsActions"
 import store from './store'
 export const getAuthKey = ()=>{
     const userId = localStorage.getItem("user")
