@@ -1,3 +1,4 @@
+import { itemsAction } from "../items/itemsSlice"
 import { userAction } from "./userSlice"
 
 export const getUser = (user)=>{
@@ -69,7 +70,7 @@ export const getItemsDetails = (id) => {
                 throw new Error('Could not fetch items')
             }
             const data = await response.json()
-            dispatch(userAction.setItems(data))
+            dispatch(itemsAction.setItems(data))
         }catch(e){
             console.log(e);
         }
@@ -89,7 +90,6 @@ export const addUser = (user)=>{
                 throw new Error('Could not fetch User')
             }
 
-            const data = await response.json()
             if (response.status === 200) {
                 return true 
             }else{

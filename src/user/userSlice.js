@@ -5,7 +5,6 @@ const userSlice = createSlice({
     initialState : {
         user : null,
         restaurant : null,
-        items : []
     },
     reducers : {
         setUser : (state , action) => {
@@ -14,9 +13,6 @@ const userSlice = createSlice({
         setRestaurant : (state , action) => {
             state.restaurant = action.payload
         },
-        setItems : (state , action) => {
-            state.items = action.payload
-        }
     }
 })
 
