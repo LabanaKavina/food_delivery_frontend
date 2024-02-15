@@ -84,7 +84,7 @@ const SignUp = () => {
     e.preventDefault();
     const isValidUserData = validateUserData();
     if (isValidUserData) {
-      const isUserAdded = await dispatch(addUser(userData));
+      const isUserAdded = await dispatch(addUser({...userData,role}));
       if (isUserAdded) {
         navigate("/login");
       }

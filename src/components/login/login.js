@@ -2,7 +2,7 @@ import { useState } from "react";
 import image from "../../UI/pizza.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {  getUser } from "../../user/userActions";
+import { getUser } from "../../user/userActions";
 import Model from "../../UI/model";
 
 const Login = () => {
@@ -32,15 +32,15 @@ const Login = () => {
     return true;
   };
 
-  const onCustomerLogin = ()=>{
-    localStorage.setItem("role","customer")
-    navigate("/register-new")
-  }
+  const onCustomerLogin = () => {
+    localStorage.setItem("role", "customer");
+    navigate("/register-new");
+  };
 
-  const onOwnerLogin = ()=>{
-    localStorage.setItem("role","admin")
-    navigate("/register-new")
-  }
+  const onOwnerLogin = () => {
+    localStorage.setItem("role", "admin");
+    navigate("/register-new");
+  };
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -49,13 +49,16 @@ const Login = () => {
       const isUserExist = await dispatch(
         getUser({ name: userName, password: userPassword })
       );
+      console.log(isUserExist);
       if (!isUserExist) {
         return setError({
           ...error,
           password: "This entered Username or Password is incorrect",
         });
       }
-      navigate("/admin");
+      if (isUserExist === "admin") {
+        navigate("/admin");
+      }
     }
   };
   return (
@@ -114,7 +117,7 @@ const Login = () => {
               <Model
                 message="Do You want to sign Up as a.. "
                 confirmText="Customer"
-                cancelText='Owner'
+                cancelText="Owner"
                 onConfirm={onCustomerLogin}
                 onCancel={onOwnerLogin}
               />

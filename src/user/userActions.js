@@ -16,7 +16,7 @@ export const getUser = (user)=>{
             if (data.length > 0) {
                 dispatch(userAction.setUser(data[0]))
                 localStorage.setItem('user',data[0].id)
-                return true
+                return data[0].role
             }else{
                 return false
             }
