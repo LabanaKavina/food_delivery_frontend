@@ -10,9 +10,12 @@ const itemsSlice = createSlice({
       state.items = action.payload;
     },
 
-    addItem:(state,action)=>{
+    addItem: (state, action) => {
       state.items.push(action.payload);
-    }
+    },
+    deleteItem: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
   },
 });
 

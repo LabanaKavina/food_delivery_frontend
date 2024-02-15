@@ -40,7 +40,7 @@ const MenuTable =(props)=>{
                 <button className="text-indigo-600 hover:text-indigo-900">Edit</button>
               </td>
               <td className="px-16 py-4 ">
-                <button className="text-red-600 hover:text-red-900">Delete</button>
+                <button className="text-red-600 hover:text-red-900" onClick={()=>props.onDelete(item.id)} >Delete</button>
               </td>
             </tr>
           );

@@ -10,7 +10,7 @@ import SignUp from "./components/login/signUp";
 import Menu from "./components/menu/menu";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Navigate to="/login" /> },
+  { path: "/", element: <Navigate to="/login" />,errorElement:<Navigate to='/login' /> },
   { path: "/login", element: <Login />,loader:checkLogin },
   {path:"/register-new",element:<SignUp />,loader:checkLogin},
   { path: "/admin", element: <RootLayout />,loader: checkAuth,children: [

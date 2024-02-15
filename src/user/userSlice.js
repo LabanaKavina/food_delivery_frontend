@@ -13,6 +13,7 @@ const userSlice = createSlice({
         setRestaurant : (state , action) => {
             state.restaurant = action.payload
         },
+       
     }
 })
 

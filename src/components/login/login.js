@@ -1,8 +1,9 @@
 import { useState } from "react";
 import image from "../../UI/pizza.jpeg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getRestaurantDetails, getUser } from "../../user/userActions";
+import {  getUser } from "../../user/userActions";
+import Model from "../../UI/model";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -11,6 +12,8 @@ const Login = () => {
     name: "",
     password: "",
   });
+  const [showSignUpOptionModel, setShowSignUpOptionModel] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,6 +31,16 @@ const Login = () => {
     }
     return true;
   };
+
+  const onCustomerLogin = ()=>{
+    localStorage.setItem("role","customer")
+    navigate("/register-new")
+  }
+
+  const onOwnerLogin = ()=>{
+    localStorage.setItem("role","admin")
+    navigate("/register-new")
+  }
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -91,12 +104,21 @@ const Login = () => {
                 Login
               </button>
             </form>
-            <NavLink
-              to="/register-new"
-              className="text-sm left-36 bottom-5 text-blue-600 underline relative"
+            <button
+              onClick={() => setShowSignUpOptionModel(!showSignUpOptionModel)}
+              className="text-sm left-44 bottom-5 text-blue-600 underline relative"
             >
-              Sign up for register{" "}
-            </NavLink>
+              Sign Up
+            </button>
+            {showSignUpOptionModel && (
+              <Model
+                message="Do You want to sign Up as a.. "
+                confirmText="Customer"
+                cancelText='Owner'
+                onConfirm={onCustomerLogin}
+                onCancel={onOwnerLogin}
+              />
+            )}
           </div>
         </div>
       </div>
