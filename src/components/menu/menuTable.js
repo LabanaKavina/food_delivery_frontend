@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MenuForm } from "./menuForm";
 
 export const MenuTable = () => {
   const items = useSelector((state) => state.items.items);
+  const [ showAddItemForm , setShowAddItemForm] = useState(false)
+  const hideForm = () => {
+    setShowAddItemForm(false)
+  }
   return (
     <>
       <div className="flex flex-col h-screen border border-solid border-black w-full">
         <div className="flex justify-end mr-16 mt-6">
-          <button className="border border-solid border-yellow-500 h-12 w-24 ">
+          <button onClick={() => setShowAddItemForm(true)} className="border border-solid border-yellow-500 h-12 w-24 ">
             Add Item
           </button>
         </div>
@@ -58,6 +64,9 @@ export const MenuTable = () => {
       </tbody>
     </table>
   </div>
+  {
+    showAddItemForm && <MenuForm onCancel={hideForm}/>
+  }
       </div>
     </>
   );
