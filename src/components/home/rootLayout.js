@@ -7,14 +7,18 @@ const RootLayout = ()=>{
         navigate('/login')
     }
     return (<>
-    <header className="bg-slate-600 h-16 flex justify-end">
-        <button onClick={() => onLogout()} className="bg-black mt-3 text-white mr-20 rounded-2xl h-10 w-32">Log out</button>
+    <header className="bg-yellow-400 h-20 flex justify-end">
+        <button onClick={() => onLogout()} className="bg-red-600 mt-4 text-xl text-white mr-20 rounded-xl h-12 w-32">Log out</button>
     </header>
-    <aside className="h-96 w-52 bg-black flex gap-10 flex-col">
-        <button className="bg-white h-10 w-full mt-10 border border-black border-solid">Menu</button>
-        <button className="bg-white h-10 w-full mt-10 border border-black border-solid">Orders</button>
+ <div className="flex">
+    <aside className="h-96 w-52 flex gap-10 flex-col shadow-lg shadow-gray-400 p-12 text-2xl">
+        <button className="h-10 w-20 mt-10 border-b-2 border-yellow-500">Menu</button>
+        <button className="h-10 w-20 mt-10 border-b-2 border-yellow-500">Orders</button>
     </aside>
+    
     <Outlet />
+    
+ </div>
     </>)
 }
 export default RootLayout

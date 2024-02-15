@@ -11,30 +11,38 @@ const Login = () => {
     name: "",
     password: "",
   });
-const dispatch = useDispatch();
-const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validateUserData = () => {
     let properName = /^[a-zA-Z ]{2,30}$/;
-    if (!properName.test(userName)) {
+    if (!properName.test(userName) || userName.trim() === "") {
       return setError({ ...error, name: "Invalid Username" });
     }
     let properPassword = /^[a-zA-Z0-9]{6,10}$/;
-    if (!properPassword.test(userPassword)) {
+    if (!properPassword.test(userPassword) || userPassword.trim() === "") {
       return setError({
         ...error,
         password: "password should contain letters between 6 to 10",
       });
     }
-    return true
+    return true;
   };
 
-  const onLogin = (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
-    const isValidUserData = validateUserData()
+    const isValidUserData = validateUserData();
     if (isValidUserData) {
-        dispatch(getUser({name: userName, password: userPassword}))
-        navigate("/admin")
+      const isUserExist = await dispatch(
+        getUser({ name: userName, password: userPassword })
+      );
+      if (!isUserExist) {
+        return setError({
+          ...error,
+          password: "This entered Username or Password is incorrect",
+        });
+      }
+      navigate("/admin");
     }
   };
   return (
@@ -57,7 +65,7 @@ const navigate = useNavigate()
                   }}
                 />
               </div>
-              {error && <span className="">{error.name}</span>}
+              {error && <span className="text-red-600">{error.name}</span>}
               <div className="flex-col flex pt-10 ">
                 <label>Password</label>
                 <input
@@ -71,7 +79,11 @@ const navigate = useNavigate()
                   }}
                 />
               </div>
-              {error && <span className="w-80 text-sm">{error.password}</span>}
+              {error && (
+                <span className="w-80 text-sm text-red-600">
+                  {error.password}
+                </span>
+              )}
               <button
                 type="submit"
                 className="ml-5 h-10 bg-red-600 mt-6 w-72 text-white text-xl"
